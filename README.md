@@ -102,6 +102,12 @@ FarmAI uses a **nature-inspired premium design system**:
 
 ---
 
+## 📚 Documentation
+
+- [Project Documentation (PDF)](docs/project-docs.pdf)
+
+---
+
 ## 🤝 Contributing
 
 1. Fork the repo
