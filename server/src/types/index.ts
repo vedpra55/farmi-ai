@@ -4,3 +4,12 @@ export interface ApiResponseShape<T> {
   message: string;
   data: T | null;
 }
+
+// Extend Express Request to include uid from Clerk auth
+declare global {
+  namespace Express {
+    interface Request {
+      uid: string;
+    }
+  }
+}
