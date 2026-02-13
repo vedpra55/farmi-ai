@@ -197,8 +197,8 @@ function SummarySection({
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start justify-between text-sm">
-      <span className="text-foreground-muted flex-shrink-0">{label}</span>
-      <span className="text-foreground font-medium text-right ml-4 break-words max-w-[60%]">
+      <span className="text-foreground-muted shrink-0">{label}</span>
+      <span className="text-foreground font-medium text-right ml-4 wrap-break-word max-w-[60%]">
         {value}
       </span>
     </div>

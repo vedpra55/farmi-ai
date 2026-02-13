@@ -29,7 +29,7 @@ export function OptionCard({
         }
       `}
     >
-      {icon && <span className="text-xl flex-shrink-0">{icon}</span>}
+      {icon && <span className="text-xl shrink-0">{icon}</span>}
       <div className="min-w-0">
         <span
           className={`block text-sm font-medium ${selected ? "text-primary" : "text-foreground"}`}
@@ -43,7 +43,7 @@ export function OptionCard({
         )}
       </div>
       {selected && (
-        <div className="ml-auto flex-shrink-0">
+        <div className="ml-auto shrink-0">
           <svg
             className="h-5 w-5 text-primary"
             fill="none"

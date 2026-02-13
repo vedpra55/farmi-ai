@@ -33,7 +33,7 @@ export function OnboardingShell({
     <div className="fixed inset-0 flex flex-col bg-background">
       {/* ── Progress Dots ────────────────────────────── */}
       {!hideProgress && (
-        <div className="flex-shrink-0 flex items-center justify-center gap-2 pt-6 pb-2 px-4">
+        <div className="shrink-0 flex items-center justify-center gap-2 pt-6 pb-2 px-4">
           {ONBOARDING_STEPS.map((s, i) => (
             <div key={s.id} className="flex items-center gap-2">
               <div
@@ -66,14 +66,14 @@ export function OnboardingShell({
 
       {/* ── Fixed Footer ─────────────────────────────── */}
       {!hideNav && (
-        <div className="flex-shrink-0 border-t border-border bg-background px-5 py-4">
+        <div className="shrink-0 border-t border-border bg-background px-5 py-4">
           <div className="mx-auto flex max-w-md items-center gap-3">
             {step > 0 && onBack && (
               <Button
                 variant="ghost"
                 size="lg"
                 onClick={onBack}
-                className="flex-shrink-0"
+                className="shrink-0"
               >
                 ← Back
               </Button>
