@@ -14,6 +14,8 @@ interface Env {
   PORT: number;
   MONGODB_URI: string;
   CORS_ORIGIN: string;
+  CLERK_SECRET_KEY: string;
+  CLERK_PUBLISHABLE_KEY: string;
 }
 
 export const env: Env = {
@@ -21,10 +23,16 @@ export const env: Env = {
   PORT: parseInt(process.env.PORT || "8000", 10),
   MONGODB_URI: process.env.MONGODB_URI || "",
   CORS_ORIGIN: process.env.CORS_ORIGIN || "*",
+  CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY || "",
+  CLERK_PUBLISHABLE_KEY: process.env.CLERK_PUBLISHABLE_KEY || "",
 };
 
 // Validate required variables
-const requiredEnvVars: (keyof Env)[] = ["MONGODB_URI"];
+const requiredEnvVars: (keyof Env)[] = [
+  "MONGODB_URI",
+  "CLERK_SECRET_KEY",
+  "CLERK_PUBLISHABLE_KEY",
+];
 
 for (const key of requiredEnvVars) {
   if (!env[key]) {
