@@ -154,5 +154,32 @@
       "edit": "Edit",
       "error": "Something went wrong. Please try again."
     }
+  },
+  "Dashboard": {
+    "sidebar": {
+      "home": "Home",
+      "crops": "My Crops",
+      "weather": "Weather",
+      "disease": "Disease",
+      "alerts": "Alerts",
+      "assistant": "Assistant",
+      "settings": "Settings",
+      "profile": "Profile"
+    },
+    "welcome": "Welcome, {name} 👋",
+    "cropStatus": "Monitoring Started",
+    "cropAdded": "{crop} crop added successfully.",
+    "location": "{city} | {country}",
+    "actions": {
+      "scan": "Upload Leaf Image",
+      "weather": "Check Weather Insights",
+      "assistant": "Ask AI Assistant"
+    },
+    "setup": {
+      "title": "Complete your profile",
+      "step1": "Profile Completed",
+      "step2": "First Disease Scan",
+      "step3": "Smart Alerts Activated"
+    }
   }
 }

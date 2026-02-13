@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/app/theme-provider";
+import { UserProvider } from "@/components/providers/user-provider";
 import { routing } from "@/i18n/routing";
 
 type Props = {
@@ -28,7 +29,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <ClerkProvider>
       <NextIntlClientProvider>
-        <ThemeProvider>{children}</ThemeProvider>
+        <UserProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </UserProvider>
       </NextIntlClientProvider>
     </ClerkProvider>
   );

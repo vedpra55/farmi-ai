@@ -1,13 +1,23 @@
-import { useTranslations } from "next-intl";
+"use client";
+
+import { WelcomeHeader } from "./_components/WelcomeHeader";
+import { CropOverview } from "./_components/CropOverview";
+import { WeatherSnapshot } from "./_components/WeatherSnapshot";
+import { QuickActions } from "./_components/QuickActions";
+import { SetupProgress } from "./_components/SetupProgress";
 
 export default function AppPage() {
-  const t = useTranslations("AppPage");
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold">{t("welcome")}</h1>
-        <p className="mt-2 text-muted-foreground">{t("comingSoon")}</p>
-      </div>
-    </main>
+    <div className="flex flex-col gap-10 p-4 md:p-8 max-w-5xl mx-auto w-full pb-24 md:pb-8">
+      <WelcomeHeader />
+
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <CropOverview />
+        <WeatherSnapshot />
+      </section>
+
+      <QuickActions />
+      <SetupProgress />
+    </div>
   );
 }

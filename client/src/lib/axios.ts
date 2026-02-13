@@ -1,12 +1,23 @@
 import axios from "axios";
 
+const serverUrl =
+  process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8000";
+
 const api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_SERVER_URL}/api`,
+  baseURL: `${serverUrl}/api`,
   timeout: 15000,
   headers: {
     "Content-Type": "application/json",
   },
 });
+
+export const setAuthToken = (token?: string | null) => {
+  if (token) {
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
+  } else {
+    delete api.defaults.headers.common.Authorization;
+  }
+};
 
 // Response interceptor — normalize errors
 api.interceptors.response.use(

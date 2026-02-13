@@ -2,18 +2,21 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useUser } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useOnboardingStore } from "../_store/onboarding-store";
 import { OnboardingShell } from "./onboarding-shell";
 import { completeOnboarding } from "../_actions";
 import { useTranslations } from "next-intl";
 import { LANGUAGES } from "../_lib/constants";
+import { useUserStore } from "@/store/user-store";
 
 export function StepConfirm() {
   const t = useTranslations("Onboarding");
   const store = useOnboardingStore();
   const { user } = useUser();
+  const { getToken } = useAuth();
+  const fetchUser = useUserStore((state) => state.fetchUser);
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -59,6 +62,10 @@ export function StepConfirm() {
 
       // Refresh Clerk session to pick up updated publicMetadata
       await user?.reload();
+      const token = await getToken();
+      if (token) {
+        await fetchUser(token);
+      }
       store.reset();
       router.push("/app");
     } catch {
