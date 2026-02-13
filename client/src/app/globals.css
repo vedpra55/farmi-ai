@@ -1,0 +1,285 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FarmAI Design System — Vibrant, Punchy, Premium
+   Nature-inspired with real personality
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Light Mode (Default) ─────────────────────────────────────────────── */
+
+:root {
+  /* Background Layers — warm cream tint, not sterile white */
+  --background: 48 40% 97%;
+  --surface: 45 30% 95%;
+  --surface-elevated: 40 25% 99%;
+  --surface-overlay: 40 20% 100%;
+
+  /* Text Hierarchy */
+  --foreground: 160 20% 8%;
+  --foreground-secondary: 160 10% 32%;
+  --foreground-muted: 160 6% 50%;
+  --foreground-inverse: 48 40% 97%;
+
+  /* Brand — Primary (Vivid Emerald Green) */
+  --primary: 158 64% 40%;
+  --primary-hover: 158 68% 34%;
+  --primary-light: 158 50% 93%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Brand — Accent (Punchy Tangerine Orange) */
+  --accent: 24 95% 53%;
+  --accent-hover: 24 95% 46%;
+  --accent-light: 24 80% 94%;
+  --accent-foreground: 0 0% 100%;
+
+  /* Semantic */
+  --success: 152 60% 38%;
+  --success-light: 152 50% 93%;
+  --warning: 42 96% 50%;
+  --warning-light: 42 85% 94%;
+  --danger: 4 80% 56%;
+  --danger-light: 4 70% 95%;
+  --info: 214 95% 54%;
+  --info-light: 214 85% 95%;
+
+  /* Borders & Dividers */
+  --border: 40 15% 89%;
+  --border-strong: 40 12% 78%;
+  --ring: 158 64% 40%;
+
+  /* Shadows */
+  --shadow-color: 160 20% 8%;
+  --shadow-xs: 0 1px 2px hsl(var(--shadow-color) / 0.05);
+  --shadow-sm:
+    0 1px 3px hsl(var(--shadow-color) / 0.08),
+    0 1px 2px hsl(var(--shadow-color) / 0.04);
+  --shadow-md:
+    0 4px 8px hsl(var(--shadow-color) / 0.06),
+    0 2px 4px hsl(var(--shadow-color) / 0.04);
+  --shadow-lg:
+    0 12px 20px hsl(var(--shadow-color) / 0.08),
+    0 4px 8px hsl(var(--shadow-color) / 0.04);
+  --shadow-xl:
+    0 24px 32px hsl(var(--shadow-color) / 0.1),
+    0 8px 12px hsl(var(--shadow-color) / 0.05);
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Spacing (8px grid) */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Typography */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --leading-tight: 1.25;
+  --leading-normal: 1.625;
+  --leading-relaxed: 1.75;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Dark Mode (via .dark class from next-themes) ─────────────────────── */
+
+.dark {
+  --background: 160 16% 7%;
+  --surface: 160 12% 11%;
+  --surface-elevated: 160 10% 15%;
+  --surface-overlay: 160 8% 18%;
+
+  --foreground: 48 20% 95%;
+  --foreground-secondary: 48 10% 68%;
+  --foreground-muted: 48 6% 46%;
+  --foreground-inverse: 160 16% 7%;
+
+  --primary: 158 58% 48%;
+  --primary-hover: 158 58% 55%;
+  --primary-light: 158 30% 14%;
+  --primary-foreground: 0 0% 100%;
+
+  --accent: 24 90% 58%;
+  --accent-hover: 24 90% 65%;
+  --accent-light: 24 40% 14%;
+  --accent-foreground: 0 0% 100%;
+
+  --success: 152 55% 46%;
+  --success-light: 152 30% 14%;
+  --warning: 42 90% 55%;
+  --warning-light: 42 40% 14%;
+  --danger: 4 72% 60%;
+  --danger-light: 4 40% 14%;
+  --info: 214 85% 60%;
+  --info-light: 214 40% 14%;
+
+  --border: 160 10% 16%;
+  --border-strong: 160 8% 24%;
+  --ring: 158 58% 48%;
+
+  --shadow-color: 0 0% 0%;
+}
+
+/* ─── Tailwind v4 Theme Integration ────────────────────────────────────── */
+
+@theme inline {
+  /* Colors */
+  --color-background: hsl(var(--background));
+  --color-surface: hsl(var(--surface));
+  --color-surface-elevated: hsl(var(--surface-elevated));
+  --color-surface-overlay: hsl(var(--surface-overlay));
+
+  --color-foreground: hsl(var(--foreground));
+  --color-foreground-secondary: hsl(var(--foreground-secondary));
+  --color-foreground-muted: hsl(var(--foreground-muted));
+  --color-foreground-inverse: hsl(var(--foreground-inverse));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-hover: hsl(var(--primary-hover));
+  --color-primary-light: hsl(var(--primary-light));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-hover: hsl(var(--accent-hover));
+  --color-accent-light: hsl(var(--accent-light));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-success: hsl(var(--success));
+  --color-success-light: hsl(var(--success-light));
+  --color-warning: hsl(var(--warning));
+  --color-warning-light: hsl(var(--warning-light));
+  --color-danger: hsl(var(--danger));
+  --color-danger-light: hsl(var(--danger-light));
+  --color-info: hsl(var(--info));
+  --color-info-light: hsl(var(--info-light));
+
+  --color-border: hsl(var(--border));
+  --color-border-strong: hsl(var(--border-strong));
+  --color-ring: hsl(var(--ring));
+
+  /* Fonts */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  /* Border Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-full: var(--radius-full);
+
+  /* Shadows */
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+}
+
+/* ─── Global Base Styles ───────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family:
+    var(--font-sans),
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  font-size: 1rem;
+  line-height: var(--leading-normal);
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
+  font-variation-settings: "opsz" 32;
+}
+
+/* ─── Focus Ring ───────────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Selection ────────────────────────────────────────────────────────── */
+
+::selection {
+  background-color: hsl(var(--primary) / 0.18);
+  color: hsl(var(--foreground));
+}
+
+/* ─── Scrollbar (Webkit) ───────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--foreground-muted) / 0.3);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground-muted) / 0.5);
+}
+
+/* ─── Utility: Surface Layers ──────────────────────────────────────────── */
+
+.surface {
+  background-color: hsl(var(--surface));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-lg);
+}
+
+.surface-elevated {
+  background-color: hsl(var(--surface-elevated));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.surface-overlay {
+  background-color: hsl(var(--surface-overlay));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+}
