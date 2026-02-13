@@ -1,0 +1,158 @@
+{
+  "Metadata": {
+    "title": "FarmAI — AI-Powered Farming Assistant",
+    "description": "Personalized, real-time farming insights. Crop monitoring, disease detection, weather analysis, smart alerts, and voice support — all in one place."
+  },
+  "HomePage": {
+    "brand": "FarmAI 🌾",
+    "signIn": "Sign In"
+  },
+  "AppPage": {
+    "welcome": "Welcome to FarmAI 🌾",
+    "comingSoon": "Your personalized farming dashboard is coming soon."
+  },
+  "Onboarding": {
+    "intro": {
+      "welcome": "Welcome to FarmAI! 🌾",
+      "subtitle": "Let's set up your personalized farming assistant."
+    },
+    "basicInfo": {
+      "title": "Tell us about yourself",
+      "subtitle": "Basic details so we can personalize your experience.",
+      "name": {
+        "label": "Name",
+        "description": "How should we address you?",
+        "placeholder": "Enter your name"
+      },
+      "phone": {
+        "label": "Phone",
+        "optional": "(optional)",
+        "description": "For SMS alerts about weather and crop health",
+        "placeholder": "+91 98765 43210"
+      },
+      "location": {
+        "title": "Your Location",
+        "detect": "📍 Detect location",
+        "detecting": "Detecting...",
+        "description": "Needed for weather data and regional crop recommendations",
+        "state": {
+          "label": "State",
+          "description": "Needed for weather and regional crop data",
+          "placeholder": "e.g. Maharashtra"
+        },
+        "district": {
+          "label": "District",
+          "description": "Helps us find district-level soil and market info",
+          "placeholder": "e.g. Pune"
+        },
+        "village": {
+          "label": "Village / Town",
+          "description": "Your nearest town for local weather accuracy",
+          "placeholder": "e.g. Baramati"
+        }
+      }
+    },
+    "farmSetup": {
+      "title": "Your farm details",
+      "subtitle": "Help us understand your farming setup.",
+      "farmSize": {
+        "label": "Farm Size (acres)",
+        "description": "Total cultivable area you currently farm",
+        "placeholder": "e.g. 5",
+        "unit": "acres"
+      },
+      "soilType": {
+        "label": "Soil Type",
+        "description": "If unsure, pick the closest match — you can change later",
+        "options": {
+          "clay": "Clay",
+          "loamy": "Loamy",
+          "sandy": "Sandy",
+          "black": "Black",
+          "red": "Red",
+          "alluvial": "Alluvial"
+        }
+      },
+      "irrigation": {
+        "label": "Irrigation Method",
+        "description": "Your primary source of water for crops",
+        "options": {
+          "rain-fed": "Rain-fed",
+          "drip": "Drip",
+          "canal": "Canal",
+          "borewell": "Borewell",
+          "sprinkler": "Sprinkler"
+        }
+      },
+      "water": {
+        "label": "Water Availability",
+        "description": "General water situation across your farming seasons",
+        "options": {
+          "low": "Low",
+          "moderate": "Moderate",
+          "high": "High"
+        }
+      }
+    },
+    "cropSetup": {
+      "title": "Add your crops",
+      "subtitle": "You can always add more later from your dashboard.",
+      "addCrop": "+ Add another crop",
+      "remove": "Remove",
+      "cropName": {
+        "label": "Crop Name",
+        "description": "The primary crop you're currently growing",
+        "placeholder": "e.g. Rice, Wheat, Cotton"
+      },
+      "sowingDate": {
+        "label": "Sowing Date",
+        "description": "When did you sow or plan to sow this crop?"
+      },
+      "growthStage": {
+        "label": "Growth Stage",
+        "description": "Approximate current stage of the crop",
+        "placeholder": "Select stage",
+        "options": {
+          "germination": "Germination",
+          "vegetative": "Vegetative",
+          "flowering": "Flowering",
+          "fruiting": "Fruiting",
+          "harvesting": "Harvesting"
+        }
+      },
+      "diseaseHistory": {
+        "label": "Past disease history?",
+        "description": "Did this crop face any disease or pest problems before?"
+      },
+      "yield": {
+        "label": "Avg. yield last season",
+        "optional": "(optional, quintals)",
+        "description": "Last season's yield helps us set baseline predictions",
+        "placeholder": "e.g. 20"
+      }
+    },
+    "confirm": {
+      "title": "You're all set! 🎉",
+      "subtitle": "Review your details before we create your farm profile.",
+      "submit": "Start Farming with AI →",
+      "sections": {
+        "profile": "Profile",
+        "location": "Location",
+        "farm": "Farm",
+        "crops": "Crops"
+      },
+      "labels": {
+        "name": "Name",
+        "language": "Language",
+        "phone": "Phone",
+        "size": "Size",
+        "soil": "Soil",
+        "irrigation": "Irrigation",
+        "water": "Water",
+        "sown": "Sown"
+      },
+      "edit": "Edit",
+      "error": "Something went wrong. Please try again."
+    }
+  }
+}
