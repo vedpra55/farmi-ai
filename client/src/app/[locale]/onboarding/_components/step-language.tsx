@@ -5,13 +5,31 @@ import { OnboardingShell } from "./onboarding-shell";
 import { OptionCard } from "./option-card";
 import { LANGUAGES } from "../_lib/constants";
 
+import { useRouter, usePathname } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
+
 export function StepLanguage() {
   const { preferredLanguage, setField, nextStep, prevStep } =
     useOnboardingStore();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleNext = () => {
+    // 1. Change locale URL if language is supported
+    if (
+      preferredLanguage &&
+      routing.locales.includes(preferredLanguage as any)
+    ) {
+      router.replace(pathname, { locale: preferredLanguage });
+    }
+
+    // 2. Advance step (persisted in store)
+    nextStep();
+  };
 
   return (
     <OnboardingShell
-      onNext={nextStep}
+      onNext={handleNext}
       onBack={prevStep}
       nextDisabled={!preferredLanguage}
     >

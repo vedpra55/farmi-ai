@@ -1,15 +1,22 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextRequest, NextResponse } from "next/server";
+import createMiddleware from "next-intl/middleware";
+import { NextResponse } from "next/server";
+import { routing } from "./i18n/routing";
 
-const isOnboardingRoute = createRouteMatcher(["/onboarding"]);
-const isPublicRoute = createRouteMatcher(["/"]);
+const intlMiddleware = createMiddleware(routing);
 
-export default clerkMiddleware(async (auth, req: NextRequest) => {
+const isOnboardingRoute = createRouteMatcher([
+  "/:locale/onboarding",
+  "/onboarding",
+]);
+const isPublicRoute = createRouteMatcher(["/", "/:locale"]);
+
+export default clerkMiddleware(async (auth, req) => {
   const { isAuthenticated, sessionClaims, redirectToSignIn } = await auth();
 
   // For users visiting /onboarding, don't try to redirect
   if (isAuthenticated && isOnboardingRoute(req)) {
-    return NextResponse.next();
+    return intlMiddleware(req);
   }
 
   // If the user isn't signed in and the route is private, redirect to sign-in
@@ -20,14 +27,20 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   // Catch users who do not have `onboardingComplete: true` in their publicMetadata
   // Redirect them to the /onboarding route to complete onboarding
   if (isAuthenticated && !sessionClaims?.metadata?.onboardingComplete) {
-    const onboardingUrl = new URL("/onboarding", req.url);
+    // Check if the user is already on the onboarding page
+    if (req.nextUrl.pathname.includes("/onboarding")) {
+      return intlMiddleware(req);
+    }
+
+    const onboardingUrl = new URL(
+      `/${routing.defaultLocale}/onboarding`,
+      req.url,
+    );
     return NextResponse.redirect(onboardingUrl);
   }
 
-  // If the user is logged in and the route is protected, let them view
-  if (isAuthenticated && !isPublicRoute(req)) {
-    return NextResponse.next();
-  }
+  // For all other routes, run the intl middleware for locale handling
+  return intlMiddleware(req);
 });
 
 export const config = {

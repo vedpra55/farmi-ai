@@ -5,7 +5,10 @@ import { OnboardingShell } from "./onboarding-shell";
 import { GROWTH_STAGES } from "../_lib/constants";
 import { Button } from "@/components/ui/button";
 
+import { useTranslations } from "next-intl";
+
 export function StepCropSetup() {
+  const t = useTranslations("Onboarding.cropSetup");
   const store = useOnboardingStore();
 
   const isValid = store.crops.every(
@@ -20,11 +23,9 @@ export function StepCropSetup() {
     >
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-foreground">
-          Add your crops
+          {t("title")}
         </h1>
-        <p className="mt-2 text-sm text-foreground-muted">
-          You can always add more later from your dashboard.
-        </p>
+        <p className="mt-2 text-sm text-foreground-muted">{t("subtitle")}</p>
 
         <div className="mt-6 space-y-4">
           {store.crops.map((crop, index) => (
@@ -38,6 +39,7 @@ export function StepCropSetup() {
                   type="button"
                   onClick={() => store.removeCrop(index)}
                   className="absolute top-3 right-3 h-6 w-6 rounded-full bg-surface hover:bg-danger-light text-foreground-muted hover:text-danger flex items-center justify-center transition-all text-xs cursor-pointer"
+                  title={t("remove")}
                 >
                   ✕
                 </button>
@@ -46,10 +48,10 @@ export function StepCropSetup() {
               {/* Crop Name */}
               <div>
                 <label className="block text-sm font-medium text-foreground-secondary mb-0.5">
-                  Crop Name
+                  {t("cropName.label")}
                 </label>
                 <p className="text-xs text-foreground-muted mb-1.5">
-                  The primary crop you&apos;re currently growing
+                  {t("cropName.description")}
                 </p>
                 <input
                   type="text"
@@ -57,7 +59,7 @@ export function StepCropSetup() {
                   onChange={(e) =>
                     store.updateCrop(index, "cropName", e.target.value)
                   }
-                  placeholder="e.g. Rice, Wheat, Cotton"
+                  placeholder={t("cropName.placeholder")}
                   className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-foreground-muted focus:border-ring focus:ring-1 focus:ring-ring outline-none transition-all"
                 />
               </div>
@@ -65,10 +67,10 @@ export function StepCropSetup() {
               {/* Sowing Date */}
               <div>
                 <label className="block text-sm font-medium text-foreground-secondary mb-0.5">
-                  Sowing Date
+                  {t("sowingDate.label")}
                 </label>
                 <p className="text-xs text-foreground-muted mb-1.5">
-                  When did you sow or plan to sow this crop?
+                  {t("sowingDate.description")}
                 </p>
                 <input
                   type="date"
@@ -83,10 +85,10 @@ export function StepCropSetup() {
               {/* Growth Stage */}
               <div>
                 <label className="block text-sm font-medium text-foreground-secondary mb-0.5">
-                  Growth Stage
+                  {t("growthStage.label")}
                 </label>
                 <p className="text-xs text-foreground-muted mb-1.5">
-                  Approximate current stage of the crop
+                  {t("growthStage.description")}
                 </p>
                 <select
                   value={crop.growthStage}
@@ -95,10 +97,10 @@ export function StepCropSetup() {
                   }
                   className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-foreground focus:border-ring focus:ring-1 focus:ring-ring outline-none transition-all"
                 >
-                  <option value="">Select stage</option>
+                  <option value="">{t("growthStage.placeholder")}</option>
                   {GROWTH_STAGES.map((g) => (
                     <option key={g.value} value={g.value}>
-                      {g.label}
+                      {t(`growthStage.options.${g.value}`)}
                     </option>
                   ))}
                 </select>
@@ -108,10 +110,10 @@ export function StepCropSetup() {
               <div className="flex items-center justify-between">
                 <div>
                   <label className="text-sm font-medium text-foreground-secondary">
-                    Past disease history?
+                    {t("diseaseHistory.label")}
                   </label>
                   <p className="text-xs text-foreground-muted">
-                    Did this crop face any disease or pest problems before?
+                    {t("diseaseHistory.description")}
                   </p>
                 </div>
                 <button
@@ -140,13 +142,13 @@ export function StepCropSetup() {
               {/* Average Yield */}
               <div>
                 <label className="block text-sm font-medium text-foreground-secondary mb-0.5">
-                  Avg. yield last season{" "}
+                  {t("yield.label")}{" "}
                   <span className="text-foreground-muted font-normal">
-                    (optional, quintals)
+                    {t("yield.optional")}
                   </span>
                 </label>
                 <p className="text-xs text-foreground-muted mb-1.5">
-                  Last season&apos;s yield helps us set baseline predictions
+                  {t("yield.description")}
                 </p>
                 <input
                   type="number"
@@ -159,7 +161,7 @@ export function StepCropSetup() {
                       e.target.value,
                     )
                   }
-                  placeholder="e.g. 20"
+                  placeholder={t("yield.placeholder")}
                   className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-foreground-muted focus:border-ring focus:ring-1 focus:ring-ring outline-none transition-all"
                 />
               </div>
@@ -168,7 +170,7 @@ export function StepCropSetup() {
 
           {/* Add crop */}
           <Button variant="ghost" size="md" fullWidth onClick={store.addCrop}>
-            + Add another crop
+            {t("addCrop")}
           </Button>
         </div>
       </div>

@@ -7,22 +7,11 @@ import { useRouter } from "next/navigation";
 import { useOnboardingStore } from "../_store/onboarding-store";
 import { OnboardingShell } from "./onboarding-shell";
 import { completeOnboarding } from "../_actions";
-import {
-  LANGUAGES,
-  SOIL_TYPES,
-  IRRIGATION_METHODS,
-  WATER_AVAILABILITY,
-  GROWTH_STAGES,
-} from "../_lib/constants";
-
-function getLabel(
-  list: readonly { value: string; label: string }[],
-  value: string,
-) {
-  return list.find((i) => i.value === value)?.label || value;
-}
+import { useTranslations } from "next-intl";
+import { LANGUAGES } from "../_lib/constants";
 
 export function StepConfirm() {
+  const t = useTranslations("Onboarding");
   const store = useOnboardingStore();
   const { user } = useUser();
   const router = useRouter();
@@ -73,16 +62,21 @@ export function StepConfirm() {
       store.reset();
       router.push("/app");
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError(t("confirm.error"));
       setIsSubmitting(false);
     }
+  };
+
+  const getOptionLabel = (category: string, value: string) => {
+    if (!value) return "";
+    return t(`${category}.options.${value}`);
   };
 
   return (
     <OnboardingShell
       onNext={handleSubmit}
       onBack={store.prevStep}
-      nextLabel="Start Farming with AI →"
+      nextLabel={t("confirm.submit")}
       isSubmitting={isSubmitting}
     >
       <div className="flex flex-col items-center">
@@ -97,10 +91,10 @@ export function StepConfirm() {
         </div>
 
         <h1 className="text-2xl font-bold tracking-tight text-foreground text-center">
-          You&apos;re all set! 🎉
+          {t("confirm.title")}
         </h1>
         <p className="mt-2 text-sm text-foreground-muted text-center">
-          Review your details before we create your farm profile.
+          {t("confirm.subtitle")}
         </p>
 
         {error && (
@@ -112,21 +106,35 @@ export function StepConfirm() {
         {/* Summary */}
         <div className="mt-6 w-full space-y-4">
           {/* Profile */}
-          <SummarySection title="Profile" onEdit={() => store.goToStep(2)}>
-            <SummaryRow label="Name" value={store.name} />
+          <SummarySection
+            title={t("confirm.sections.profile")}
+            onEdit={() => store.goToStep(2)}
+            editLabel={t("confirm.edit")}
+          >
+            <SummaryRow label={t("confirm.labels.name")} value={store.name} />
             <SummaryRow
-              label="Language"
-              value={getLabel(LANGUAGES, store.preferredLanguage)}
+              label={t("confirm.labels.language")}
+              value={
+                LANGUAGES.find((l) => l.value === store.preferredLanguage)
+                  ?.label || store.preferredLanguage
+              }
             />
             {store.phoneNumber && (
-              <SummaryRow label="Phone" value={store.phoneNumber} />
+              <SummaryRow
+                label={t("confirm.labels.phone")}
+                value={store.phoneNumber}
+              />
             )}
           </SummarySection>
 
           {/* Location */}
-          <SummarySection title="Location" onEdit={() => store.goToStep(2)}>
+          <SummarySection
+            title={t("confirm.sections.location")}
+            onEdit={() => store.goToStep(2)}
+            editLabel={t("confirm.edit")}
+          >
             <SummaryRow
-              label="Location"
+              label={t("confirm.sections.location")}
               value={[store.villageOrTown, store.district, store.state]
                 .filter(Boolean)
                 .join(", ")}
@@ -134,29 +142,43 @@ export function StepConfirm() {
           </SummarySection>
 
           {/* Farm */}
-          <SummarySection title="Farm" onEdit={() => store.goToStep(3)}>
-            <SummaryRow label="Size" value={`${store.farmSize} acres`} />
+          <SummarySection
+            title={t("confirm.sections.farm")}
+            onEdit={() => store.goToStep(3)}
+            editLabel={t("confirm.edit")}
+          >
             <SummaryRow
-              label="Soil"
-              value={getLabel(SOIL_TYPES, store.soilType)}
+              label={t("confirm.labels.size")}
+              value={`${store.farmSize} ${t("farmSetup.farmSize.unit")}`}
             />
             <SummaryRow
-              label="Irrigation"
-              value={getLabel(IRRIGATION_METHODS, store.irrigationMethod)}
+              label={t("confirm.labels.soil")}
+              value={getOptionLabel("farmSetup.soilType", store.soilType)}
             />
             <SummaryRow
-              label="Water"
-              value={getLabel(WATER_AVAILABILITY, store.waterAvailability)}
+              label={t("confirm.labels.irrigation")}
+              value={getOptionLabel(
+                "farmSetup.irrigation",
+                store.irrigationMethod,
+              )}
+            />
+            <SummaryRow
+              label={t("confirm.labels.water")}
+              value={getOptionLabel("farmSetup.water", store.waterAvailability)}
             />
           </SummarySection>
 
           {/* Crops */}
-          <SummarySection title="Crops" onEdit={() => store.goToStep(4)}>
+          <SummarySection
+            title={t("confirm.sections.crops")}
+            onEdit={() => store.goToStep(4)}
+            editLabel={t("confirm.edit")}
+          >
             {store.crops.map((c, i) => (
               <SummaryRow
                 key={i}
                 label={c.cropName}
-                value={`Sown: ${c.sowingDate}${c.growthStage ? ` · ${getLabel(GROWTH_STAGES, c.growthStage)}` : ""}`}
+                value={`${t("confirm.labels.sown")}: ${c.sowingDate}${c.growthStage ? ` · ${t(`cropSetup.growthStage.options.${c.growthStage}`)}` : ""}`}
               />
             ))}
           </SummarySection>
@@ -172,10 +194,12 @@ function SummarySection({
   title,
   onEdit,
   children,
+  editLabel,
 }: {
   title: string;
   onEdit: () => void;
   children: React.ReactNode;
+  editLabel: string;
 }) {
   return (
     <div className="rounded-xl border border-border bg-surface-elevated p-4">
@@ -186,7 +210,7 @@ function SummarySection({
           onClick={onEdit}
           className="text-xs font-medium text-primary hover:underline cursor-pointer"
         >
-          Edit
+          {editLabel}
         </button>
       </div>
       <div className="space-y-2">{children}</div>

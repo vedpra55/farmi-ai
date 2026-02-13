@@ -9,7 +9,10 @@ import {
   WATER_AVAILABILITY,
 } from "../_lib/constants";
 
+import { useTranslations } from "next-intl";
+
 export function StepFarmSetup() {
+  const t = useTranslations("Onboarding.farmSetup");
   const store = useOnboardingStore();
 
   const isValid =
@@ -26,27 +29,25 @@ export function StepFarmSetup() {
     >
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-foreground">
-          Your farm details
+          {t("title")}
         </h1>
-        <p className="mt-2 text-sm text-foreground-muted">
-          Help us understand your farming setup.
-        </p>
+        <p className="mt-2 text-sm text-foreground-muted">{t("subtitle")}</p>
 
         <div className="mt-6 space-y-6">
           {/* Farm Size */}
           <div>
             <label className="block text-sm font-medium text-foreground-secondary mb-0.5">
-              Farm Size (acres)
+              {t("farmSize.label")}
             </label>
             <p className="text-xs text-foreground-muted mb-1.5">
-              Total cultivable area you currently farm
+              {t("farmSize.description")}
             </p>
             <input
               type="number"
               inputMode="decimal"
               value={store.farmSize}
               onChange={(e) => store.setField("farmSize", e.target.value)}
-              placeholder="e.g. 5"
+              placeholder={t("farmSize.placeholder")}
               className="w-full rounded-xl border border-border bg-surface-elevated px-4 py-3 text-base text-foreground placeholder:text-foreground-muted focus:border-ring focus:ring-1 focus:ring-ring outline-none transition-all"
             />
           </div>
@@ -54,16 +55,16 @@ export function StepFarmSetup() {
           {/* Soil Type */}
           <div>
             <label className="block text-sm font-medium text-foreground-secondary mb-1">
-              Soil Type
+              {t("soilType.label")}
             </label>
             <p className="text-xs text-foreground-muted mb-2.5">
-              If unsure, pick the closest match — you can change later
+              {t("soilType.description")}
             </p>
             <div className="grid grid-cols-2 gap-2.5">
               {SOIL_TYPES.map((s) => (
                 <OptionCard
                   key={s.value}
-                  label={s.label}
+                  label={t(`soilType.options.${s.value}`)}
                   icon={s.icon}
                   selected={store.soilType === s.value}
                   onClick={() => store.setField("soilType", s.value)}
@@ -75,16 +76,16 @@ export function StepFarmSetup() {
           {/* Irrigation Method */}
           <div>
             <label className="block text-sm font-medium text-foreground-secondary mb-1">
-              Irrigation Method
+              {t("irrigation.label")}
             </label>
             <p className="text-xs text-foreground-muted mb-2.5">
-              Your primary source of water for crops
+              {t("irrigation.description")}
             </p>
             <div className="space-y-2.5">
               {IRRIGATION_METHODS.map((m) => (
                 <OptionCard
                   key={m.value}
-                  label={m.label}
+                  label={t(`irrigation.options.${m.value}`)}
                   icon={m.icon}
                   selected={store.irrigationMethod === m.value}
                   onClick={() => store.setField("irrigationMethod", m.value)}
@@ -96,16 +97,16 @@ export function StepFarmSetup() {
           {/* Water Availability */}
           <div>
             <label className="block text-sm font-medium text-foreground-secondary mb-1">
-              Water Availability
+              {t("water.label")}
             </label>
             <p className="text-xs text-foreground-muted mb-2.5">
-              General water situation across your farming seasons
+              {t("water.description")}
             </p>
             <div className="grid grid-cols-3 gap-2.5">
               {WATER_AVAILABILITY.map((w) => (
                 <OptionCard
                   key={w.value}
-                  label={w.label}
+                  label={t(`water.options.${w.value}`)}
                   selected={store.waterAvailability === w.value}
                   onClick={() => store.setField("waterAvailability", w.value)}
                 />
