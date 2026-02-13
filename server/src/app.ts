@@ -9,6 +9,7 @@ import { errorHandler } from "@/lib/middleware/error-handler.js";
 import { ApiResponse } from "@/lib/utils/api-response.js";
 import { notFound } from "@/lib/middleware/not-found.js";
 import userRoutes from "@/features/user/user.routes.js";
+import cropRoutes from "@/features/crop/crop.routes.js";
 
 export const createApp = (): Express => {
   const app = express();
@@ -29,6 +30,7 @@ export const createApp = (): Express => {
 
   // Routes
   app.use("/api/user", userRoutes);
+  app.use("/api/user/crops", cropRoutes);
 
   // 404 Handler
   app.use(notFound);

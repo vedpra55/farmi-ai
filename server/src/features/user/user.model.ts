@@ -80,7 +80,7 @@ const CropDetailSchema = new Schema<ICropDetail>(
     pastDiseaseHistory: { type: Boolean, default: false },
     averageYieldLastSeason: { type: Number },
   },
-  { _id: false },
+  { _id: true },
 );
 
 const LocationSchema = new Schema<ILocation>(
