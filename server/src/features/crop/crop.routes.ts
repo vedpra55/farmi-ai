@@ -1,10 +1,6 @@
 import { Router } from "express";
-import { requireAuthWithUser } from "@/lib/middleware/auth.js";
-import {
-  addCrop,
-  updateCrop,
-  deleteCrop,
-} from "@/features/crop/crop.controller.js";
+import { requireAuthWithUser } from "../../lib/middleware/auth.js";
+import { addCrop, updateCrop, deleteCrop } from "./crop.controller.js";
 
 const router = Router();
 

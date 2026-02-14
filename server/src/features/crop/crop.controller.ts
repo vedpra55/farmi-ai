@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import { Request, Response } from "express";
-import { User } from "@/features/user/user.model.js";
-import { asyncHandler } from "@/lib/utils/async-handler.js";
-import { ApiResponse } from "@/lib/utils/api-response.js";
-import { ApiError } from "@/lib/utils/api-error.js";
+import { User } from "../user/user.model.js";
+import { asyncHandler } from "../../lib/utils/async-handler.js";
+import { ApiResponse } from "../../lib/utils/api-response.js";
+import { ApiError } from "../../lib/utils/api-error.js";
 
 /**
  * POST /api/user/crops

@@ -1,4 +1,4 @@
-import { IUser } from "@/features/user/user.model.js";
+import { IUser } from "../user/user.model.js";
 
 /**
  * Builds a rich system prompt from the farmer's profile.

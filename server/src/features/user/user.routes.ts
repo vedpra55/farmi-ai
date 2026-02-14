@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { requireAuthWithUser } from "@/lib/middleware/auth.js";
-import { getMe, completeOnboarding } from "@/features/user/user.controller.js";
+import { requireAuthWithUser } from "../../lib/middleware/auth.js";
+import { getMe, completeOnboarding } from "./user.controller.js";
 
 const router = Router();
 

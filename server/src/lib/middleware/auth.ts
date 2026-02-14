@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getAuth } from "@clerk/express";
-import { ApiError } from "@/lib/utils/api-error.js";
+import { ApiError } from "../utils/api-error.js";
 
 /**
  * Middleware that extracts and validates the Clerk userId from the request,

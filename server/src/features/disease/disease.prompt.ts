@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { IUser } from "@/features/user/user.model.js";
+import { IUser } from "../user/user.model.js";
 
 export const DiseaseAnalysisSchema = z.object({
   language: z.string().describe("Language used for all text fields."),

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import { asyncHandler } from "@/lib/utils/async-handler.js";
-import { ApiResponse } from "@/lib/utils/api-response.js";
-import { ApiError } from "@/lib/utils/api-error.js";
+import { asyncHandler } from "../../lib/utils/async-handler.js";
+import { ApiResponse } from "../../lib/utils/api-response.js";
+import { ApiError } from "../../lib/utils/api-error.js";
 
 const WEATHER_API_BASE = "https://weather.googleapis.com/v1";
 // Use GOOGLE_WEATHER_API_KEY or fall back to Maps key

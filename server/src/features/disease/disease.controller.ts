@@ -1,15 +1,12 @@
 import { Request, Response } from "express";
 import { generateObject } from "ai";
 import { google } from "@ai-sdk/google";
-import { ApiError } from "@/lib/utils/api-error.js";
-import { ApiResponse } from "@/lib/utils/api-response.js";
-import { asyncHandler } from "@/lib/utils/async-handler.js";
-import { DiseaseScan } from "@/features/disease/disease.model.js";
-import { User } from "@/features/user/user.model.js";
-import {
-  DiseaseAnalysisSchema,
-  buildDiseasePrompt,
-} from "@/features/disease/disease.prompt.js";
+import { ApiError } from "../../lib/utils/api-error.js";
+import { ApiResponse } from "../../lib/utils/api-response.js";
+import { asyncHandler } from "../../lib/utils/async-handler.js";
+import { DiseaseScan } from "./disease.model.js";
+import { User } from "../user/user.model.js";
+import { DiseaseAnalysisSchema, buildDiseasePrompt } from "./disease.prompt.js";
 
 const MODEL_ID = "gemini-1.5-flash";
 const MAX_IMAGE_BYTES = 6 * 1024 * 1024;

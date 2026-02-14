@@ -1,9 +1,6 @@
 import { Router } from "express";
-import { requireAuthWithUser } from "@/lib/middleware/auth.js";
-import {
-  getCurrentWeather,
-  getWeatherForecast,
-} from "@/features/weather/weather.controller.js";
+import { requireAuthWithUser } from "../../lib/middleware/auth.js";
+import { getCurrentWeather, getWeatherForecast } from "./weather.controller.js";
 
 const router = Router();
 

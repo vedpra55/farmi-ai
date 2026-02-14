@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { requireAuthWithUser } from "@/lib/middleware/auth.js";
+import { requireAuthWithUser } from "../../lib/middleware/auth.js";
 import {
   chat,
   getVoiceToken,
   getConversations,
   getConversation,
   deleteConversation,
-} from "@/features/assistant/assistant.controller.js";
+} from "./assistant.controller.js";
 
 const router = Router();
 

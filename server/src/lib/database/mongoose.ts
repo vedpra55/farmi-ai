@@ -1,20 +1,33 @@
 import mongoose from "mongoose";
-import { env } from "@/lib/config/env.js";
-import { logger } from "@/lib/utils/logger.js";
 
-export const connectDatabase = async (): Promise<void> => {
-  try {
-    if (!env.MONGODB_URI) {
-      throw new Error(
-        "MONGODB_URI is not defined in the environment variables",
-      );
-    }
+const MONGODB_URI = process.env.MONGODB_URI!;
+let connectionPromise: Promise<typeof mongoose> | null = null;
 
-    await mongoose.connect(env.MONGODB_URI);
+if (!MONGODB_URI) {
+  throw new Error(
+    "Please define the MONGODB_URI environment variable inside .env",
+  );
+}
 
-    logger.info("🍃 Connected to MongoDB");
-  } catch (error) {
-    logger.error("❌ MongoDB connection error:", error);
-    process.exit(1);
+export async function connectToDB() {
+  if (mongoose.connection.readyState === 1) {
+    return;
   }
-};
+
+  if (connectionPromise) {
+    await connectionPromise;
+    return;
+  }
+
+  try {
+    connectionPromise = mongoose.connect(MONGODB_URI);
+    const connectionInstance = await connectionPromise;
+    console.log(
+      `\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`,
+    );
+  } catch (error) {
+    connectionPromise = null;
+    console.log("MONGODB connection FAILED ", error);
+    throw error;
+  }
+}

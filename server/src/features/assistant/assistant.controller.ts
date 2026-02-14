@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { streamText, convertToModelMessages, UIMessage } from "ai";
 import { GoogleGenAI, Modality } from "@google/genai";
-import { User } from "@/features/user/user.model.js";
-import { Conversation } from "@/features/assistant/conversation.model.js";
-import { buildSystemPrompt } from "@/features/assistant/build-system-prompt.js";
-import { asyncHandler } from "@/lib/utils/async-handler.js";
-import { ApiResponse } from "@/lib/utils/api-response.js";
-import { ApiError } from "@/lib/utils/api-error.js";
+import { User } from "../user/user.model.js";
+import { Conversation } from "./conversation.model.js";
+import { buildSystemPrompt } from "./build-system-prompt.js";
+import { asyncHandler } from "../../lib/utils/async-handler.js";
+import { ApiResponse } from "../../lib/utils/api-response.js";
+import { ApiError } from "../../lib/utils/api-error.js";
 import { google } from "@ai-sdk/google";
 
 // ──────────────────────────────────────────────
