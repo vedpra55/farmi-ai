@@ -1,5 +1,6 @@
 import { Sprout, Pencil, Trash2 } from "lucide-react";
 import { ICropDetail } from "@/types/user";
+import { useLocale, useTranslations } from "next-intl";
 
 interface CropCardProps {
   crop: ICropDetail;
@@ -8,10 +9,18 @@ interface CropCardProps {
 }
 
 export function CropCard({ crop, onEdit, onDelete }: CropCardProps) {
+  const t = useTranslations("Crops.card");
+  const locale = useLocale();
   const sowingDate = crop.sowingDate ? new Date(crop.sowingDate) : new Date();
   const daysSinceSowing = Math.floor(
     (new Date().getTime() - sowingDate.getTime()) / (1000 * 60 * 60 * 24),
   );
+
+  const dateFormatter = new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
   const stageMap: Record<string, number> = {
     germination: 10,
@@ -21,6 +30,16 @@ export function CropCard({ crop, onEdit, onDelete }: CropCardProps) {
     harvesting: 95,
   };
   const progress = stageMap[crop.growthStage?.toLowerCase()] ?? 15;
+  const stageKey = crop.growthStage?.toLowerCase();
+  const knownStages = [
+    "germination",
+    "vegetative",
+    "flowering",
+    "fruiting",
+    "harvesting",
+  ];
+  const stageLabelKey =
+    stageKey && knownStages.includes(stageKey) ? stageKey : "unknown";
 
   return (
     <div className="bg-background border border-border rounded-xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden group hover:border-primary/20 transition-colors">
@@ -33,14 +52,14 @@ export function CropCard({ crop, onEdit, onDelete }: CropCardProps) {
         <button
           onClick={() => onEdit(crop)}
           className="p-1.5 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
-          title="Edit"
+          title={t("edit")}
         >
           <Pencil className="w-3.5 h-3.5" />
         </button>
         <button
           onClick={() => onDelete(crop)}
           className="p-1.5 rounded-md hover:bg-red-50 text-muted-foreground hover:text-red-600 transition-colors"
-          title="Delete"
+          title={t("delete")}
         >
           <Trash2 className="w-3.5 h-3.5" />
         </button>
@@ -49,10 +68,10 @@ export function CropCard({ crop, onEdit, onDelete }: CropCardProps) {
       <div>
         <div className="flex items-center justify-between mb-4">
           <span className="bg-success/10 text-success text-xs font-semibold px-2.5 py-1 rounded-md">
-            Active
+            {t("active")}
           </span>
           <span className="text-xs text-muted-foreground font-medium">
-            Day {daysSinceSowing}
+            {t("dayLabel", { day: daysSinceSowing })}
           </span>
         </div>
 
@@ -61,8 +80,8 @@ export function CropCard({ crop, onEdit, onDelete }: CropCardProps) {
         </h3>
         <p className="text-sm text-muted-foreground">
           {crop.sowingDate
-            ? `Sown on ${new Date(crop.sowingDate).toLocaleDateString()}`
-            : "Sowing date not set"}
+            ? t("sownOn", { date: dateFormatter.format(sowingDate) })
+            : t("sowingDateNotSet")}
         </p>
       </div>
 
@@ -75,20 +94,20 @@ export function CropCard({ crop, onEdit, onDelete }: CropCardProps) {
             />
           </div>
           <span className="text-xs font-medium text-muted-foreground capitalize">
-            {crop.growthStage || "Vegetative"}
+            {t(`stage.${stageLabelKey}` as any)}
           </span>
         </div>
 
         {crop.pastDiseaseHistory && (
           <p className="text-xs text-warning font-medium mt-2">
-            ⚠️ Past disease history reported
+            {t("pastDisease")}
           </p>
         )}
 
         {crop.averageYieldLastSeason !== undefined &&
           crop.averageYieldLastSeason > 0 && (
             <p className="text-xs text-muted-foreground mt-1">
-              Last yield: {crop.averageYieldLastSeason} quintals
+              {t("lastYield", { value: crop.averageYieldLastSeason })}
             </p>
           )}
       </div>

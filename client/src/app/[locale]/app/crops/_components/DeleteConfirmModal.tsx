@@ -2,6 +2,7 @@
 
 import { Modal } from "@/components/ui/Modal";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface DeleteConfirmModalProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ export function DeleteConfirmModal({
   onConfirm,
   cropName,
 }: DeleteConfirmModalProps) {
+  const t = useTranslations("Crops.delete");
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
@@ -34,14 +36,16 @@ export function DeleteConfirmModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Delete Crop"
+      title={t("title")}
       maxWidth="max-w-sm"
     >
       <div className="space-y-5">
         <p className="text-sm text-muted-foreground">
-          Are you sure you want to delete{" "}
-          <span className="font-semibold text-foreground">{cropName}</span>?
-          This action cannot be undone.
+          {t.rich("message", {
+            crop: () => (
+              <span className="font-semibold text-foreground">{cropName}</span>
+            ),
+          })}
         </p>
 
         <div className="flex items-center gap-3">
@@ -50,7 +54,7 @@ export function DeleteConfirmModal({
             onClick={onClose}
             className="flex-1 px-4 py-2.5 bg-secondary text-foreground rounded-lg text-sm font-medium hover:bg-secondary/80 transition-colors"
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             type="button"
@@ -58,7 +62,7 @@ export function DeleteConfirmModal({
             disabled={isDeleting}
             className="flex-1 px-4 py-2.5 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isDeleting ? "Deleting..." : "Delete"}
+            {isDeleting ? t("deleting") : t("confirm")}
           </button>
         </div>
       </div>

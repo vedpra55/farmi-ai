@@ -1,5 +1,5 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/app/theme-provider";
@@ -25,10 +25,11 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   // Enable static rendering
   setRequestLocale(locale);
+  const messages = await getMessages();
 
   return (
     <ClerkProvider>
-      <NextIntlClientProvider>
+      <NextIntlClientProvider locale={locale} messages={messages}>
         <UserProvider>
           <ThemeProvider>{children}</ThemeProvider>
         </UserProvider>

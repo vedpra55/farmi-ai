@@ -1,29 +1,24 @@
 import { Link } from "@/i18n/navigation";
 import { Upload, CloudSun, MessageSquare, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const actions = [
   {
     href: "/app/disease",
     icon: Upload,
-    title: "Scan Crop",
-    description: "Detect diseases instantly with AI",
-    cta: "Start Scan",
+    key: "scan",
     color: "primary",
   },
   {
     href: "/app/weather",
     icon: CloudSun,
-    title: "Weather",
-    description: "Check 7-day forecast & rain alerts",
-    cta: "View Forecast",
+    key: "weather",
     color: "info",
   },
   {
     href: "/app/assistant",
     icon: MessageSquare,
-    title: "Ask AI",
-    description: "Get instant farming advice",
-    cta: "Chat Now",
+    key: "assistant",
     color: "accent",
   },
 ] as const;
@@ -54,10 +49,12 @@ const colorMap = {
 };
 
 export function QuickActions() {
+  const t = useTranslations("DashboardHome.quickActions");
+
   return (
     <section>
       <h3 className="text-lg font-semibold text-foreground mb-4">
-        Quick Actions
+        {t("title")}
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {actions.map((action) => {
@@ -80,16 +77,16 @@ export function QuickActions() {
               </div>
               <div>
                 <h4 className="font-semibold text-foreground text-lg">
-                  {action.title}
+                  {t(`${action.key}.title`)}
                 </h4>
                 <p className="text-sm text-muted-foreground mt-1">
-                  {action.description}
+                  {t(`${action.key}.description`)}
                 </p>
               </div>
               <div
                 className={`mt-auto pt-2 flex items-center ${colors.text} text-sm font-medium opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all`}
               >
-                {action.cta} <ArrowRight className="w-4 h-4 ml-1" />
+                {t(`${action.key}.cta`)} <ArrowRight className="w-4 h-4 ml-1" />
               </div>
             </Link>
           );

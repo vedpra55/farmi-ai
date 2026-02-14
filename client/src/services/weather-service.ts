@@ -1,7 +1,5 @@
-import { CurrentConditionsResponse } from "@/types/weather";
-
-const WEATHER_API_BASE = "https://weather.googleapis.com/v1";
-const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+import axios from "@/lib/axios";
+import { CurrentConditionsResponse, ForecastResponse } from "@/types/weather";
 
 /**
  * Fetch current weather conditions for a given location.
@@ -9,19 +7,42 @@ const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 export async function fetchCurrentWeather(
   latitude: number,
   longitude: number,
+  token?: string | null,
 ): Promise<CurrentConditionsResponse> {
-  if (!API_KEY) {
-    throw new Error("NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is not set");
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  const response = await axios.get(
+    `/weather/current?lat=${latitude}&lng=${longitude}`,
+    { headers },
+  );
+
+  // @ts-ignore
+  if (response.success && response.data) {
+    // @ts-ignore
+    return response.data;
   }
+  // @ts-ignore
+  throw new Error(response.message || "Failed to fetch current weather");
+}
 
-  const url = `${WEATHER_API_BASE}/currentConditions:lookup?key=${API_KEY}&location.latitude=${latitude}&location.longitude=${longitude}`;
+/**
+ * Fetch weather forecast for a given location.
+ */
+export async function fetchWeatherForecast(
+  latitude: number,
+  longitude: number,
+  token?: string | null,
+): Promise<ForecastResponse> {
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  const response = await axios.get(
+    `/weather/forecast?lat=${latitude}&lng=${longitude}`,
+    { headers },
+  );
 
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Weather API error (${response.status}): ${error}`);
+  // @ts-ignore
+  if (response.success && response.data) {
+    // @ts-ignore
+    return response.data;
   }
-
-  return response.json();
+  // @ts-ignore
+  throw new Error(response.message || "Failed to fetch weather forecast");
 }

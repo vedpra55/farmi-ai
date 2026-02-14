@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Modal } from "@/components/ui/Modal";
 import { ICropDetail } from "@/types/user";
+import { useTranslations } from "next-intl";
 
 const GROWTH_STAGES = [
   "germination",
@@ -25,6 +26,7 @@ export function CropFormModal({
   onSubmit,
   initialData,
 }: CropFormModalProps) {
+  const t = useTranslations("Crops.form");
   const isEditing = !!initialData;
 
   const [cropName, setCropName] = useState("");
@@ -56,7 +58,7 @@ export function CropFormModal({
     setError("");
 
     if (!cropName.trim() || !sowingDate) {
-      setError("Crop name and sowing date are required.");
+      setError(t("errors.required"));
       return;
     }
 
@@ -71,7 +73,7 @@ export function CropFormModal({
       });
       onClose();
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError(t("errors.generic"));
     } finally {
       setIsSubmitting(false);
     }
@@ -81,7 +83,7 @@ export function CropFormModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={isEditing ? "Edit Crop" : "Add New Crop"}
+      title={isEditing ? t("titleEdit") : t("titleAdd")}
     >
       <form onSubmit={handleSubmit} className="space-y-5">
         {error && (
@@ -93,13 +95,13 @@ export function CropFormModal({
         {/* Crop Name */}
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-foreground">
-            Crop Name <span className="text-red-500">*</span>
+            {t("cropName.label")} <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             value={cropName}
             onChange={(e) => setCropName(e.target.value)}
-            placeholder="e.g. Rice, Wheat, Cotton"
+            placeholder={t("cropName.placeholder")}
             className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
           />
         </div>
@@ -107,7 +109,7 @@ export function CropFormModal({
         {/* Sowing Date */}
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-foreground">
-            Sowing Date <span className="text-red-500">*</span>
+            {t("sowingDate.label")} <span className="text-red-500">*</span>
           </label>
           <input
             type="date"
@@ -120,17 +122,17 @@ export function CropFormModal({
         {/* Growth Stage */}
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-foreground">
-            Growth Stage
+            {t("growthStage.label")}
           </label>
           <select
             value={growthStage}
             onChange={(e) => setGrowthStage(e.target.value)}
             className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
           >
-            <option value="">Select stage</option>
+            <option value="">{t("growthStage.placeholder")}</option>
             {GROWTH_STAGES.map((stage) => (
               <option key={stage} value={stage}>
-                {stage.charAt(0).toUpperCase() + stage.slice(1)}
+                {t(`growthStage.options.${stage}` as any)}
               </option>
             ))}
           </select>
@@ -149,23 +151,23 @@ export function CropFormModal({
             htmlFor="diseaseHistory"
             className="text-sm font-medium text-foreground"
           >
-            Past disease history?
+            {t("pastDiseaseHistory.label")}
           </label>
         </div>
 
         {/* Average Yield */}
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-foreground">
-            Avg. yield last season{" "}
+            {t("averageYield.label")}{" "}
             <span className="text-muted-foreground font-normal">
-              (optional, quintals)
+              {t("averageYield.optional")}
             </span>
           </label>
           <input
             type="number"
             value={averageYield}
             onChange={(e) => setAverageYield(e.target.value)}
-            placeholder="e.g. 20"
+            placeholder={t("averageYield.placeholder")}
             className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
           />
         </div>
@@ -177,7 +179,7 @@ export function CropFormModal({
             onClick={onClose}
             className="flex-1 px-4 py-2.5 bg-secondary text-foreground rounded-lg text-sm font-medium hover:bg-secondary/80 transition-colors"
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             type="submit"
@@ -185,10 +187,10 @@ export function CropFormModal({
             className="flex-1 px-4 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting
-              ? "Saving..."
+              ? t("saving")
               : isEditing
-                ? "Save Changes"
-                : "Add Crop"}
+                ? t("saveChanges")
+                : t("addCrop")}
           </button>
         </div>
       </form>

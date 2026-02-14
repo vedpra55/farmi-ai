@@ -9,6 +9,7 @@ import {
   Sun,
 } from "lucide-react";
 import { useWeather } from "@/hooks/use-weather";
+import { useTranslations } from "next-intl";
 
 /**
  * Map Google Weather condition types to Lucide icons.
@@ -35,26 +36,43 @@ function getFarmingTip(
   temp?: number,
   humidity?: number,
   rainProbability?: number,
+  t?: (key: string) => string,
 ): string {
   if (rainProbability && rainProbability > 60) {
-    return "Rain expected — hold off irrigation and secure loose materials.";
+    return (
+      t?.("tips.rainHigh") ??
+      "Rain expected — hold off irrigation and secure loose materials."
+    );
   }
   if (temp && temp > 38) {
-    return "Extreme heat — ensure crops are well-watered and mulched.";
+    return (
+      t?.("tips.heat") ??
+      "Extreme heat — ensure crops are well-watered and mulched."
+    );
   }
   if (humidity && humidity > 80) {
-    return "High humidity — watch for fungal diseases on leaves.";
+    return (
+      t?.("tips.humidity") ??
+      "High humidity — watch for fungal diseases on leaves."
+    );
   }
   if (rainProbability && rainProbability > 30) {
-    return "Light rain possible — good day for fertiliser application.";
+    return (
+      t?.("tips.rainLight") ??
+      "Light rain possible — good day for fertiliser application."
+    );
   }
   if (temp && temp < 10) {
-    return "Cold conditions — protect tender seedlings from frost.";
+    return (
+      t?.("tips.cold") ??
+      "Cold conditions — protect tender seedlings from frost."
+    );
   }
-  return "Good conditions for field work today.";
+  return t?.("tips.good") ?? "Good conditions for field work today.";
 }
 
 export function WeatherSnapshot() {
+  const t = useTranslations("DashboardHome.weather");
   const { weather, isLoading, error } = useWeather();
 
   // Loading skeleton
@@ -85,10 +103,10 @@ export function WeatherSnapshot() {
         <div className="flex justify-between items-start">
           <div>
             <p className="text-sm font-medium text-muted-foreground mb-1">
-              Weather Today
+              {t("title")}
             </p>
             <p className="text-sm text-muted-foreground mt-2">
-              Unable to load weather data.
+              {t("loadError")}
             </p>
           </div>
           <div className="bg-secondary p-3 rounded-full text-muted-foreground">
@@ -105,14 +123,14 @@ export function WeatherSnapshot() {
   const rainChance = weather?.precipitation?.probability?.percent;
   const windSpeed = weather?.wind?.speed?.value;
   const WeatherIcon = getWeatherIcon(weather?.weatherCondition?.type);
-  const tip = getFarmingTip(temp, humidity, rainChance);
+  const tip = getFarmingTip(temp, humidity, rainChance, t);
 
   return (
     <div className="bg-background border border-border rounded-xl p-6 shadow-sm flex flex-col justify-between group hover:border-info/30 transition-colors">
       <div className="flex justify-between items-start">
         <div>
           <p className="text-sm font-medium text-muted-foreground mb-1">
-            Weather Today
+            {t("title")}
           </p>
           <div className="flex items-baseline gap-1">
             <h3 className="text-4xl font-bold text-foreground">
@@ -163,9 +181,9 @@ export function WeatherSnapshot() {
         </div>
 
         <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <span>Humidity</span>
-          <span>Rain</span>
-          <span>Feels like</span>
+          <span>{t("labels.humidity")}</span>
+          <span>{t("labels.rain")}</span>
+          <span>{t("labels.feelsLike")}</span>
         </div>
 
         <div className="h-px bg-border w-full" />
