@@ -14,13 +14,13 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useUserStore } from "@/store/user-store";
 
 const sidebarItems = [
   { icon: LayoutDashboard, label: "home", href: "/app" },
   { icon: Sprout, label: "crops", href: "/app/crops" },
   { icon: ScanLine, label: "disease", href: "/app/disease" },
   { icon: CloudSun, label: "weather", href: "/app/weather" },
-  { icon: Bell, label: "alerts", href: "/app/alerts" },
   { icon: MessageSquare, label: "assistant", href: "/app/assistant" },
   { icon: Settings, label: "settings", href: "/app/settings" },
 ];
@@ -28,6 +28,7 @@ const sidebarItems = [
 export function Sidebar() {
   const t = useTranslations("Dashboard.sidebar");
   const pathname = usePathname();
+  const user = useUserStore((s) => s.user);
 
   return (
     <aside className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-background border-r border-border z-50">
@@ -76,21 +77,23 @@ export function Sidebar() {
       </nav>
 
       {/* User Profile Section */}
-      <div className="p-4 border-t border-border mt-auto">
-        <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer group">
-          <div className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-foreground">
-            <User className="w-5 h-5" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-foreground truncate">
-              Raj Farmer
-            </p>
-            <p className="text-xs text-muted-foreground truncate">
-              raj@example.com
-            </p>
+      {user && (
+        <div className="p-4 border-t border-border mt-auto">
+          <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer group">
+            <div className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-foreground">
+              <User className="w-5 h-5" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm capitalize font-medium text-foreground truncate">
+                {user.name}
+              </p>
+              <p className="text-xs  text-muted-foreground truncate">
+                {user.email}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </aside>
   );
 }

@@ -4,8 +4,133 @@
     "description": "Personalized, real-time farming insights. Crop monitoring, disease detection, weather analysis, smart alerts, and voice support — all in one place."
   },
   "HomePage": {
-    "brand": "FarmAI 🌾",
-    "signIn": "Sign In"
+    "brand": "FarmAI",
+    "signIn": "Sign In",
+    "getStarted": "Get Started",
+    "dashboard": "Dashboard",
+    "hero": {
+      "badge": "AI-Powered Agriculture Platform",
+      "titlePart1": "FarmAI",
+      "titlePart2": "Intelligent Farming Starts Here",
+      "subtitle": "FarmAI helps farmers monitor crop health, detect diseases early, and receive real-time personalized guidance — all in their own language.",
+      "cta": "Start Protecting Your Crop",
+      "dashboardCta": "Go to Dashboard",
+      "highlights": {
+        "monitoring": {
+          "title": "Proactive crop monitoring",
+          "desc": "Spot disease risk early with signal-first insights and visual scanning."
+        },
+        "intelligence": {
+          "title": "Localized intelligence",
+          "desc": "Recommendations tuned to your climate, crop, and field conditions."
+        },
+        "accessible": {
+          "title": "Always accessible",
+          "desc": "Multilingual guidance across devices, even with low connectivity."
+        }
+      }
+    },
+    "challenge": {
+      "title": "Farming Shouldn’t Rely on Guesswork",
+      "description": "Farmers make daily decisions that directly impact crop yield and income. Weather fluctuations, delayed disease detection, and improper irrigation timing can cause significant losses. Most digital tools offer generic advice that does not adapt to individual farm conditions.",
+      "label": "The Challenge",
+      "items": {
+        "insights": "Limited personalized crop insights",
+        "detection": "Late disease detection",
+        "monitoring": "No proactive monitoring system"
+      },
+      "bridge": {
+        "label": "FarmAI bridges the gap",
+        "items": {
+          "support": "Intelligent, accessible, real-time support.",
+          "workflow": "Built for regional crops and farmer workflows.",
+          "yield": "Designed to reduce risk and increase yield."
+        }
+      },
+      "badge": {
+        "top": "Powered by AI",
+        "bottom": "24/7 Intelligence"
+      }
+    },
+    "howItWorks": {
+      "label": "How FarmAI Works",
+      "title": "Guidance built around your farm",
+      "description": "Simple steps, powerful outcomes — designed to fit into the realities of daily farming.",
+      "steps": {
+        "step1": {
+          "title": "Add Your Crop",
+          "desc": "Create a personalized crop profile based on location, crop type, and farming conditions."
+        },
+        "step2": {
+          "title": "Monitor & Scan",
+          "desc": "Upload leaf images and track real-time weather insights."
+        },
+        "step3": {
+          "title": "Receive Smart Guidance",
+          "desc": "Get proactive alerts, treatment suggestions, and AI-powered recommendations tailored to your farm."
+        }
+      }
+    },
+    "features": {
+      "title": "Everything You Need to Farm Smarter",
+      "description": "Focus on the field while FarmAI handles the monitoring, alerts, and intelligence behind the scenes.",
+      "list": {
+        "dashboard": {
+          "title": "Personalized Crop Dashboard",
+          "desc": "A customized dashboard built around your crop, location, and farming data."
+        },
+        "disease": {
+          "title": "Crop Disease Detection",
+          "desc": "Upload leaf images to identify potential diseases with severity insights and treatment guidance."
+        },
+        "weather": {
+          "title": "Real-Time Weather Insights",
+          "desc": "Location-based forecasts with actionable farming recommendations."
+        },
+        "language": {
+          "title": "Multi-Language Support",
+          "desc": "Switch seamlessly between regional languages for better accessibility."
+        },
+        "voice": {
+          "title": "Voice Assistant",
+          "desc": "Ask farming-related questions using voice and receive spoken responses."
+        },
+        "assistant": {
+          "title": "AI Farming Assistant",
+          "desc": "Context-aware support tailored to your crop and location."
+        }
+      }
+    },
+    "realWorld": {
+      "label": "Built for Real-World Agriculture",
+      "title": "Designed with simplicity, accessibility, and reliability at its core",
+      "description": "FarmAI empowers farmers to make data-driven decisions, reduce risk, and improve productivity — whether you manage a single field or multiple acres.",
+      "points": {
+        "local": "Localized insights and regional crop intelligence",
+        "alerts": "Reliable alerts for disease, irrigation, and weather risks",
+        "voice": "Voice-first design for hands-free guidance"
+      }
+    },
+    "finalCta": {
+      "label": "Start Making Smarter Farming Decisions",
+      "title": "Personalized insights. Real-time monitoring. Better crop protection.",
+      "button": "Get Started Today",
+      "dashboardButton": "Open Dashboard"
+    },
+    "footer": {
+      "tagline": "AI-Powered Personal Farming Assistant",
+      "rights": "© 2026 FarmAI. All rights reserved.",
+      "sections": {
+        "quickLinks": "Quick Links",
+        "controls": "Controls"
+      },
+      "links": {
+        "home": "Home",
+        "features": "Features",
+        "about": "About",
+        "contact": "Contact"
+      }
+    }
   },
   "AppPage": {
     "welcome": "Welcome to FarmAI 🌾",
@@ -180,6 +305,290 @@
       "step1": "Profile Completed",
       "step2": "First Disease Scan",
       "step3": "Smart Alerts Activated"
+    }
+  },
+  "DashboardHome": {
+    "header": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening",
+      "defaultName": "Farmer",
+      "defaultLocation": "India",
+      "defaultCrop": "Crop",
+      "statusLine": "Your {crop} is looking good today.",
+      "mascotAlt": "Farmer Mascot"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "scan": {
+        "title": "Scan Crop",
+        "description": "Detect diseases instantly with AI",
+        "cta": "Start Scan"
+      },
+      "weather": {
+        "title": "Weather",
+        "description": "Check 7-day forecast and rain alerts",
+        "cta": "View Forecast"
+      },
+      "assistant": {
+        "title": "Ask AI",
+        "description": "Get instant farming advice",
+        "cta": "Chat Now"
+      }
+    },
+    "setup": {
+      "title": "Setup Progress",
+      "completed": "{done}/2 Completed",
+      "profileComplete": "Complete Farm Profile",
+      "scanFirst": "Scan your first crop",
+      "scanRequired": "Required to generate health score",
+      "start": "Start"
+    },
+    "cropOverview": {
+      "monitoringActive": "Monitoring Active",
+      "dayLabel": "Day {day}",
+      "defaultCrop": "Crop",
+      "sownOn": "Sown on {date}",
+      "sowingDateNotSet": "Sowing date not set",
+      "stage": {
+        "germination": "Germination",
+        "vegetative": "Vegetative",
+        "flowering": "Flowering",
+        "fruiting": "Fruiting",
+        "harvesting": "Harvesting",
+        "unknown": "Vegetative"
+      },
+      "moreCrop": "+{count} more crop",
+      "moreCrops": "+{count} more crops",
+      "viewCropDetails": "View crop details",
+      "viewAll": "View All"
+    },
+    "weather": {
+      "title": "Weather Today",
+      "loadError": "Unable to load weather data.",
+      "labels": {
+        "humidity": "Humidity",
+        "rain": "Rain",
+        "feelsLike": "Feels like"
+      },
+      "tips": {
+        "rainHigh": "Rain expected — hold off irrigation and secure loose materials.",
+        "heat": "Extreme heat — ensure crops are well-watered and mulched.",
+        "humidity": "High humidity — watch for fungal diseases on leaves.",
+        "rainLight": "Light rain possible — good day for fertiliser application.",
+        "cold": "Cold conditions — protect tender seedlings from frost.",
+        "good": "Good conditions for field work today."
+      }
+    }
+  },
+  "Crops": {
+    "title": "My Crops",
+    "countNone": "No crops added yet",
+    "countOne": "{count} crop registered",
+    "countMany": "{count} crops registered",
+    "addCrop": "Add Crop",
+    "emptyTitle": "No crops yet",
+    "emptySubtitle": "Add your first crop to start getting personalized farming insights.",
+    "addFirstCrop": "Add First Crop",
+    "card": {
+      "active": "Active",
+      "dayLabel": "Day {day}",
+      "sownOn": "Sown on {date}",
+      "sowingDateNotSet": "Sowing date not set",
+      "stage": {
+        "germination": "Germination",
+        "vegetative": "Vegetative",
+        "flowering": "Flowering",
+        "fruiting": "Fruiting",
+        "harvesting": "Harvesting",
+        "unknown": "Vegetative"
+      },
+      "pastDisease": "⚠️ Past disease history reported",
+      "lastYield": "Last yield: {value} quintals",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "form": {
+      "titleAdd": "Add New Crop",
+      "titleEdit": "Edit Crop",
+      "errors": {
+        "required": "Crop name and sowing date are required.",
+        "generic": "Something went wrong. Please try again."
+      },
+      "cropName": {
+        "label": "Crop Name",
+        "placeholder": "e.g. Rice, Wheat, Cotton"
+      },
+      "sowingDate": {
+        "label": "Sowing Date"
+      },
+      "growthStage": {
+        "label": "Growth Stage",
+        "placeholder": "Select stage",
+        "options": {
+          "germination": "Germination",
+          "vegetative": "Vegetative",
+          "flowering": "Flowering",
+          "fruiting": "Fruiting",
+          "harvesting": "Harvesting"
+        }
+      },
+      "pastDiseaseHistory": {
+        "label": "Past disease history?"
+      },
+      "averageYield": {
+        "label": "Avg. yield last season",
+        "optional": "(optional, quintals)",
+        "placeholder": "e.g. 20"
+      },
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes",
+      "addCrop": "Add Crop"
+    },
+    "delete": {
+      "title": "Delete Crop",
+      "message": "Are you sure you want to delete {crop}? This action cannot be undone.",
+      "cancel": "Cancel",
+      "deleting": "Deleting...",
+      "confirm": "Delete"
+    }
+  },
+  "Settings": {
+    "title": "Settings",
+    "subtitle": "Manage your preferences and account settings.",
+    "language": {
+      "title": "Language",
+      "label": "App Language",
+      "description": "Select your preferred language for the interface."
+    },
+    "appearance": {
+      "title": "Appearance",
+      "label": "Theme",
+      "description": "Customize how the app looks on your device."
+    },
+    "account": {
+      "title": "Account",
+      "signOutLabel": "Sign Out",
+      "signOutDescription": "Log out of your account on this device.",
+      "signOutCta": "Sign Out"
+    }
+  },
+  "Weather": {
+    "title": "Weather Forecast",
+    "subtitle": "7-day weather prediction for your farm.",
+    "dailyBreakdown": "Daily Breakdown",
+    "rainLabel": "{value}% Rain",
+    "noRain": "No rain expected",
+    "errorTitle": "Error",
+    "max": "Max",
+    "min": "Min",
+    "graph": {
+      "title": "7-Day Forecast",
+      "high": "High",
+      "low": "Low",
+      "rain": "Rain"
+    }
+  },
+  "Assistant": {
+    "title": "AI Assistant",
+    "subtitle": "Ask anything about farming",
+    "thinking": "Thinking...",
+    "placeholder": "Ask anything...",
+    "send": "Send",
+    "voice": "Voice",
+    "voiceListening": "Listening...",
+    "voiceSpeaking": "Speaking...",
+    "voiceConnecting": "Connecting...",
+    "voiceEnd": "End Voice Chat",
+    "voiceSpeak": "Speak your question in Hindi or English",
+    "voiceTryAgain": "Try Again",
+    "beta": "Beta",
+    "newChat": "New Chat",
+    "voiceMode": "Voice Mode",
+    "attach": "Attach file",
+    "disclaimer": "FarmAI can make mistakes. Consult with an expert for critical decisions.",
+    "emptyTitle": "FarmAI Assistant",
+    "emptyHeading": "How can I help your farm today?",
+    "emptyDescription": "I can analyze your crop health, suggest irrigation schedules, or identify pests from photos.",
+    "copy": "Copy",
+    "helpful": "Helpful",
+    "notHelpful": "Not Helpful",
+    "noConversations": "No previous conversations",
+    "historyGroups": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "last7Days": "Previous 7 Days",
+      "older": "Older"
+    },
+    "voiceState": {
+      "idle": "Tap to start",
+      "connecting": "Connecting...",
+      "listening": "Listening...",
+      "speaking": "FarmAI is speaking...",
+      "errorTitle": "Connection Error",
+      "listeningHelp": "Ask about your farm, check weather, or identify pests.",
+      "errorHelp": "Please try again.",
+      "retry": "Retry Connection"
+    },
+    "suggestions": {
+      "irrigate": "🌾 When should I irrigate?",
+      "pests": "🐛 How to prevent pests?",
+      "weather": "🌤 Weather advice for today",
+      "fertilizer": "💊 Fertilizer recommendation"
+    }
+  },
+  "Disease": {
+    "title": "Disease Detection",
+    "subtitle": "Upload detailed photos of your crops to identify diseases, pests, and get treatment recommendations.",
+    "newScan": "New Scan",
+    "historyTab": "History",
+    "language": {
+      "label": "Language"
+    },
+    "upload": {
+      "title": "Upload crop image",
+      "subtitle": "Drag and drop or click to select a clear photo of the affected plant part",
+      "drop": "Drop image here",
+      "selectedAlt": "Selected crop"
+    },
+    "analyze": {
+      "button": "Analyze Crop",
+      "loading": "Analyzing...",
+      "success": "Analysis completed successfully",
+      "error": "Failed to analyze image"
+    },
+    "startNewScan": "← Start New Scan",
+    "recentScans": "Recent Scans",
+    "history": {
+      "loading": "Loading history...",
+      "empty": "No scans yet",
+      "severity": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "unknown": "Unknown"
+      }
+    },
+    "result": {
+      "healthy": "Healthy",
+      "severityLabel": "Severity",
+      "severity": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "unknown": "Unknown"
+      },
+      "confidence": "Confidence",
+      "symptoms": "Symptoms",
+      "causes": "Causes",
+      "likelyCauses": "Likely Causes",
+      "spreadRisk": "Spread Risk",
+      "organic": "Organic Treatment",
+      "chemical": "Chemical Treatment",
+      "actions": "Immediate Actions",
+      "prevention": "Future Prevention",
+      "monitor": "What to Monitor"
     }
   }
 }

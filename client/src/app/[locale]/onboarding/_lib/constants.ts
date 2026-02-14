@@ -5,12 +5,6 @@
 export const LANGUAGES = [
   { value: "en", label: "English", native: "English" },
   { value: "hi", label: "Hindi", native: "हिन्दी" },
-  { value: "ta", label: "Tamil", native: "தமிழ்" },
-  { value: "te", label: "Telugu", native: "తెలుగు" },
-  { value: "kn", label: "Kannada", native: "ಕನ್ನಡ" },
-  { value: "mr", label: "Marathi", native: "मराठी" },
-  { value: "bn", label: "Bengali", native: "বাংলা" },
-  { value: "pa", label: "Punjabi", native: "ਪੰਜਾਬੀ" },
 ] as const;
 
 // ──────────────────────────────────────────────

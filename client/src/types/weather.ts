@@ -76,3 +76,45 @@ export interface CurrentConditionsResponse {
   cloudCover: number;
   currentConditionsHistory: CurrentConditionsHistory;
 }
+
+// ──────────────────────────────────────────────
+// Google Weather API — Forecast Types
+// ──────────────────────────────────────────────
+
+export interface HourlyForecast {
+  forecastTime: string;
+  temperature: TemperatureValue;
+  feelsLikeTemperature: TemperatureValue;
+  humidity: number;
+  precipitationProbability: number;
+  precipitation: asPrecipitation;
+  wind: Wind;
+  weatherCondition: WeatherCondition;
+}
+
+interface asPrecipitation {
+  probability: number;
+  amount?: number;
+}
+
+export interface DailyForecast {
+  forecastDate: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  dayOfWeek: string;
+  temperature: {
+    min: TemperatureValue;
+    max: TemperatureValue;
+  };
+  precipitationProbability: number;
+  weatherCondition: WeatherCondition;
+  sunrise: string;
+  sunset: string;
+}
+
+export interface ForecastResponse {
+  dailyForecasts: DailyForecast[];
+  hourlyForecasts: HourlyForecast[];
+}

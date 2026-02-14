@@ -1,20 +1,31 @@
 import { useUserStore } from "@/store/user-store";
 import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 
 export function WelcomeHeader() {
+  const t = useTranslations("DashboardHome.header");
+  const locale = useLocale();
   const user = useUserStore((s) => s.user);
 
-  const userName = user?.name?.split(" ")[0] || "Farmer";
+  const userName = user?.name?.split(" ")[0] || t("defaultName");
   const userCity =
-    user?.location?.villageOrTown || user?.location?.district || "India";
+    user?.location?.villageOrTown ||
+    user?.location?.district ||
+    t("defaultLocation");
   const currentCrop = user?.crops?.[0];
-  const cropName = currentCrop?.cropName || "Crop";
+  const cropName = currentCrop?.cropName || t("defaultCrop");
 
   // Dynamic greeting based on time
   const hour = new Date().getHours();
-  let greeting = "Good evening";
-  if (hour < 12) greeting = "Good morning";
-  else if (hour < 18) greeting = "Good afternoon";
+  let greeting = t("evening");
+  if (hour < 12) greeting = t("morning");
+  else if (hour < 18) greeting = t("afternoon");
+
+  const dateFormatter = new Intl.DateTimeFormat(locale, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <header className="flex flex-row justify-between items-center gap-6 py-4 md:py-0">
@@ -24,22 +35,15 @@ export function WelcomeHeader() {
             📍 {userCity}
           </span>
           <span className="text-muted-foreground/40">•</span>
-          <span>
-            {new Date().toLocaleDateString("en-US", {
-              weekday: "long",
-              month: "long",
-              day: "numeric",
-            })}
-          </span>
+          <span>{dateFormatter.format(new Date())}</span>
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-serif font-medium text-foreground tracking-tight leading-tight">
+        <h1 className="text-3xl capitalize md:text-4xl font-serif font-medium text-foreground tracking-tight leading-tight">
           {greeting}, {userName} 👋
         </h1>
 
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Your <span className="font-medium text-foreground">{cropName}</span>{" "}
-          is looking good today.
+          {t("statusLine", { crop: cropName })}
         </p>
       </div>
 
@@ -47,7 +51,7 @@ export function WelcomeHeader() {
       <div className="hidden md:block relative w-36 h-36 shrink-0">
         <Image
           src="/assets/farmer-2.png"
-          alt="Farmer Mascot"
+          alt={t("mascotAlt")}
           fill
           className="object-contain drop-shadow-sm"
           priority

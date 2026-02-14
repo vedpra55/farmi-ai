@@ -1,11 +1,10 @@
 import axios from "axios";
 
-const serverUrl =
-  process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8000";
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8000";
 
 const api = axios.create({
   baseURL: `${serverUrl}/api`,
-  timeout: 15000,
+  timeout: 60000, // 60 seconds (extended for AI operations)
   headers: {
     "Content-Type": "application/json",
   },

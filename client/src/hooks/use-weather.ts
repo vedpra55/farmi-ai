@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { CurrentConditionsResponse } from "@/types/weather";
 import { fetchCurrentWeather } from "@/services/weather-service";
 import { useUserStore } from "@/store/user-store";
+import { useAuth } from "@clerk/nextjs";
 
 const REFRESH_INTERVAL = 30 * 60 * 1000; // 30 minutes
 
@@ -14,6 +15,7 @@ interface UseWeatherReturn {
 
 export function useWeather(): UseWeatherReturn {
   const user = useUserStore((s) => s.user);
+
   const lat = user?.location?.latitude;
   const lng = user?.location?.longitude;
 
@@ -22,6 +24,7 @@ export function useWeather(): UseWeatherReturn {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { getToken } = useAuth();
 
   const fetchWeather = useCallback(async () => {
     if (!lat || !lng) return;
@@ -30,7 +33,8 @@ export function useWeather(): UseWeatherReturn {
     setError(null);
 
     try {
-      const data = await fetchCurrentWeather(lat, lng);
+      const token = await getToken();
+      const data = await fetchCurrentWeather(lat, lng, token);
       setWeather(data);
     } catch (err) {
       const message =
@@ -42,12 +46,10 @@ export function useWeather(): UseWeatherReturn {
     }
   }, [lat, lng]);
 
-  // Fetch on mount + when location changes
   useEffect(() => {
     fetchWeather();
   }, [fetchWeather]);
 
-  // Auto-refresh every 30 minutes
   useEffect(() => {
     if (!lat || !lng) return;
 

@@ -8,8 +8,10 @@ import { ICropDetail } from "@/types/user";
 import { CropCard } from "./_components/CropCard";
 import { CropFormModal } from "./_components/CropFormModal";
 import { DeleteConfirmModal } from "./_components/DeleteConfirmModal";
+import { useTranslations } from "next-intl";
 
 export default function CropsPage() {
+  const t = useTranslations("Crops");
   const { getToken } = useAuth();
   const user = useUserStore((s) => s.user);
   const { addCrop, updateCrop, deleteCrop } = useUserStore();
@@ -46,19 +48,22 @@ export default function CropsPage() {
     }
   };
 
+  const cropCountLabel =
+    crops.length === 0
+      ? t("countNone")
+      : crops.length === 1
+        ? t("countOne", { count: crops.length })
+        : t("countMany", { count: crops.length });
+
   return (
     <div className="flex flex-col gap-8 p-4 md:p-8 max-w-5xl mx-auto w-full pb-24 md:pb-8">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-foreground tracking-tight">
-            My Crops
+            {t("title")}
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            {crops.length > 0
-              ? `${crops.length} crop${crops.length > 1 ? "s" : ""} registered`
-              : "No crops added yet"}
-          </p>
+          <p className="text-sm text-muted-foreground mt-1">{cropCountLabel}</p>
         </div>
 
         <button
@@ -66,7 +71,7 @@ export default function CropsPage() {
           className="flex items-center gap-2 px-4 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors shadow-sm"
         >
           <Plus className="w-4 h-4" />
-          Add Crop
+          {t("addCrop")}
         </button>
       </div>
 
@@ -88,17 +93,17 @@ export default function CropsPage() {
             <Sprout className="w-10 h-10 text-muted-foreground" />
           </div>
           <h3 className="text-lg font-semibold text-foreground mb-1">
-            No crops yet
+            {t("emptyTitle")}
           </h3>
           <p className="text-sm text-muted-foreground max-w-xs mb-4">
-            Add your first crop to start getting personalized farming insights.
+            {t("emptySubtitle")}
           </p>
           <button
             onClick={handleAdd}
             className="flex items-center gap-2 px-4 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
           >
             <Plus className="w-4 h-4" />
-            Add First Crop
+            {t("addFirstCrop")}
           </button>
         </div>
       )}

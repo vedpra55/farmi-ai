@@ -1,12 +1,15 @@
 import { useUserStore } from "@/store/user-store";
 import { Link } from "@/i18n/navigation";
 import { Sprout, ArrowRight } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
 export function CropOverview() {
+  const t = useTranslations("DashboardHome.cropOverview");
+  const locale = useLocale();
   const user = useUserStore((s) => s.user);
 
   const currentCrop = user?.crops?.[0];
-  const cropName = currentCrop?.cropName || "Crop";
+  const cropName = currentCrop?.cropName || t("defaultCrop");
   const totalCrops = user?.crops?.length ?? 0;
   const sowingDate = currentCrop?.sowingDate
     ? new Date(currentCrop.sowingDate)
@@ -15,6 +18,24 @@ export function CropOverview() {
   const daysSinceSowing = Math.floor(
     (new Date().getTime() - sowingDate.getTime()) / (1000 * 60 * 60 * 24),
   );
+
+  const dateFormatter = new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  const stageKey = currentCrop?.growthStage?.toLowerCase();
+  const knownStages = [
+    "germination",
+    "vegetative",
+    "flowering",
+    "fruiting",
+    "harvesting",
+  ];
+  const stageLabelKey =
+    stageKey && knownStages.includes(stageKey) ? stageKey : "unknown";
+  const stageLabel = t(`stage.${stageLabelKey}` as any);
+  const extraCount = totalCrops - 1;
 
   return (
     <Link
@@ -28,18 +49,20 @@ export function CropOverview() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <span className="bg-success/10 text-success text-xs font-semibold px-2.5 py-1 rounded-md">
-            Monitoring Active
+            {t("monitoringActive")}
           </span>
           <span className="text-xs text-muted-foreground font-medium">
-            Day {daysSinceSowing}
+            {t("dayLabel", { day: daysSinceSowing })}
           </span>
         </div>
 
         <h2 className="text-2xl font-bold text-foreground mb-1">{cropName}</h2>
         <p className="text-sm text-muted-foreground">
           {currentCrop?.sowingDate
-            ? `Sown on ${new Date(currentCrop.sowingDate).toLocaleDateString()}`
-            : "Sowing date not set"}
+            ? t("sownOn", {
+                date: dateFormatter.format(new Date(currentCrop.sowingDate)),
+              })
+            : t("sowingDateNotSet")}
         </p>
       </div>
 
@@ -49,18 +72,20 @@ export function CropOverview() {
             <div className="h-full bg-success w-[15%] rounded-full" />
           </div>
           <span className="text-xs font-medium text-muted-foreground">
-            Vegetative
+            {stageLabel}
           </span>
         </div>
 
         <div className="flex items-center justify-between mt-4 pt-3 border-t border-border">
           <span className="text-xs text-muted-foreground">
             {totalCrops > 1
-              ? `+${totalCrops - 1} more crop${totalCrops > 2 ? "s" : ""}`
-              : "View crop details"}
+              ? extraCount === 1
+                ? t("moreCrop", { count: extraCount })
+                : t("moreCrops", { count: extraCount })
+              : t("viewCropDetails")}
           </span>
           <span className="text-xs font-medium text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-            View All <ArrowRight className="w-3 h-3" />
+            {t("viewAll")} <ArrowRight className="w-3 h-3" />
           </span>
         </div>
       </div>
